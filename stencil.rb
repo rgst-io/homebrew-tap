@@ -5,23 +5,23 @@
 class Stencil < Formula
   desc "A modern living-template engine for evolving repositories"
   homepage "https://stencil.rgst.io"
-  version "0.4.0"
+  version "0.5.0"
   license "Apache-2.0"
 
   depends_on "git"
 
   on_macos do
-    if Hardware::CPU.intel?
-      url "https://github.com/rgst-io/stencil/releases/download/v0.4.0/stencil_0.4.0_darwin_amd64.tar.xz"
-      sha256 "83f55ef09a9746a5205ed9bb9ce0a2a40ebf14363379fd82940f229bf06aa64a"
+    on_intel do
+      url "https://github.com/rgst-io/stencil/releases/download/v0.5.0/stencil_0.5.0_darwin_amd64.tar.xz"
+      sha256 "d80b83b6b40b9ef163639d3f75c799fe7872c2ac6287fc58056caabaedd63ab9"
 
       def install
         bin.install "stencil"
       end
     end
-    if Hardware::CPU.arm?
-      url "https://github.com/rgst-io/stencil/releases/download/v0.4.0/stencil_0.4.0_darwin_arm64.tar.xz"
-      sha256 "6906d2e38de5fe86c3acbb8afc3b2e827a954e65795db0025046ddb86f339baa"
+    on_arm do
+      url "https://github.com/rgst-io/stencil/releases/download/v0.5.0/stencil_0.5.0_darwin_arm64.tar.xz"
+      sha256 "22cb9d4725f452a7392d7cb0747578b743f23d50421db94f4c722646d41972b4"
 
       def install
         bin.install "stencil"
@@ -30,20 +30,24 @@ class Stencil < Formula
   end
 
   on_linux do
-    if Hardware::CPU.intel?
-      url "https://github.com/rgst-io/stencil/releases/download/v0.4.0/stencil_0.4.0_linux_amd64.tar.xz"
-      sha256 "7f576b757a2e91c583b707c883c8dea97ab1a38f0889459b0c4083a59564b0d7"
+    on_intel do
+      if Hardware::CPU.is_64_bit?
+        url "https://github.com/rgst-io/stencil/releases/download/v0.5.0/stencil_0.5.0_linux_amd64.tar.xz"
+        sha256 "70751e5fa0072aed6f48f18943bc6d61a741f36ce20ac7c320726285f3d347aa"
 
-      def install
-        bin.install "stencil"
+        def install
+          bin.install "stencil"
+        end
       end
     end
-    if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/rgst-io/stencil/releases/download/v0.4.0/stencil_0.4.0_linux_arm64.tar.xz"
-      sha256 "ce405c7541bf72e9a92c79a10d8abcead1b249a15336b1e256b183ee31522249"
+    on_arm do
+      if Hardware::CPU.is_64_bit?
+        url "https://github.com/rgst-io/stencil/releases/download/v0.5.0/stencil_0.5.0_linux_arm64.tar.xz"
+        sha256 "95601ef95cb5148eb4cedcd2e89c22b6499cb4c9f46b4b498d8d0f424ad8d214"
 
-      def install
-        bin.install "stencil"
+        def install
+          bin.install "stencil"
+        end
       end
     end
   end
